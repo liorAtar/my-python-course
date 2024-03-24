@@ -1,0 +1,20 @@
+# Write an equation that uses multiplication, division, an exponent, addition, and subtraction that is equal to 100.25.
+# Hint: This is just to test your memory of the basic arithmetic commands, work backwards from 100.25
+( 10 + 10 ) * 20 / 2**2 - 5 + 5.25 = 100.25
+
+# Answer these 3 questions without typing code. Then type code to check your answer.
+# 1. What is the value of the expression 4 * (6 + 5)
+44
+# 2. What is the value of the expression 4 * 6 + 5
+29
+# 3. What is the value of the expression 4 + 6 * 5
+34
+
+# What is the type of the result of the expression 3 + 1.5 + 4?
+8.5 -> float
+
+# What would you use to find a number’s square root, as well as its square?
+#Square root:
+4**0.5
+# Square:
+2**2

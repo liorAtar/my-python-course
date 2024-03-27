@@ -10,8 +10,9 @@ class Player:
 
     def make_bet(self):
         while True:
+            bet_input = input("Make a bet: ")
             try:
-                bet = int(input("Make a bet: "))
+                bet = int(bet_input)
 
                 # Check if the bet is within the valid range
                 if bet <= 0:

@@ -20,7 +20,7 @@ def start_deal(deck: Deck, dealer_hand: Hand, player: Player):
         hit(deck, dealer_hand)
 
 
-def player_chose_hit():
+def is_player_chose_hit():
     """
        Function to prompt the player for hitting or standing.
     """
@@ -87,7 +87,7 @@ def start_game():
 
     while player_game_on and player.hand.value != 21:
 
-        if player_chose_hit():
+        if is_player_chose_hit():
             # Player chose to hit
             hit(deck, player.hand)
             show_hands(dealer_hand, player.hand, True)

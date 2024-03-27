@@ -2,15 +2,30 @@ from IPython.display import clear_output
 import random
 
 
-def display_board(board):
-    print(f'{board[7]} | {board[8]} | {board[9]}')
+def display_board(board: list):
+    """
+    Displays the Tic Tac Toe board.
+
+    Args:
+    - board (list): A list representing the Tic Tac Toe board.
+
+    Returns:
+    - None
+    """
+    print(f'{board[6]} | {board[7]} | {board[8]}')
     print(f'-   -   - ')
-    print(f'{board[4]} | {board[5]} | {board[6]}')
+    print(f'{board[3]} | {board[4]} | {board[5]}')
     print(f'-   -   - ')
-    print(f'{board[1]} | {board[2]} | {board[3]}')
+    print(f'{board[0]} | {board[1]} | {board[2]}')
 
 
 def player_input():
+    """
+    Prompts players to choose their markers ('X' or 'O').
+
+    Returns:
+    - tuple: A tuple containing the markers chosen by player 1 and player 2.
+    """
     player1 = ''
     player2 = 'X'
     while player1 != 'X' and player1 != 'O':
@@ -19,15 +34,36 @@ def player_input():
     if player1 == 'X':
         player2 = 'O'
 
-    return {'player1': player1, 'player2': player2}
+    return player1, player2
 
 
-def place_marker(board, marker, position):
-    board[position] = marker
+def place_marker(board: list, marker: str, position: int):
+    """
+    Places the marker on the board at the specified position.
+
+    Args:
+    - board (list): A list representing the Tic Tac Toe board.
+    - marker (str): Marker to be placed on the board ('X' or 'O').
+    - position (int): Position on the board where the marker will be placed.
+
+    Returns:
+    - None
+    """
+    board[position - 1] = marker
 
 
-def win_check(board, mark):
-    winning_poz = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (1, 5, 9), (3, 5, 7), (1, 4, 7), (2, 5, 8), (3, 6, 9))
+def win_check(board: list, mark: str):
+    """
+    Checks if the player with the given marker has won the game.
+
+    Args:
+    - board (list): A list representing the Tic Tac Toe board.
+    - mark (str): Marker of the player ('X' or 'O').
+
+    Returns:
+    - bool: True if the player has won, False otherwise.
+    """
+    winning_poz = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 4, 8), (2, 4, 6), (0, 3, 6), (1, 4, 7), (2, 5, 8))
 
     for option in winning_poz:
         poz1 = option[0]
@@ -41,27 +77,60 @@ def win_check(board, mark):
 
 
 def choose_first():
+    """
+    Randomly selects which player goes first.
+
+    Returns:
+    - int: 1 if player 1 goes first, 2 if player 2 goes first.
+    """
     return random.randint(1, 2)
 
 
-def space_check(board, position):
+def space_check(board: list, position: int):
+    """
+    Checks if a position on the board is available.
+
+    Args:
+    - board (list): A list representing the Tic Tac Toe board.
+    - position (int): Position on the board to be checked.
+
+    Returns:
+    - bool: True if the position is available, False otherwise.
+    """
     return board[position] == ' '
 
 
-def full_board_check(board):
-    for num in range(1, 10):
-        if space_check(board, num):
-            return False
+def full_board_check(board: list):
+    """
+    Checks if the board is full.
+
+    Args:
+    - board (list): A list representing the Tic Tac Toe board.
+
+    Returns:
+    - bool: True if the board is full, False otherwise.
+    """
+    if ' ' in board:
+        return False
     return True
 
 
-def player_choice(board):
+def player_choice(board: list):
+    """
+    Allows the current player to choose a position on the board.
+
+    Args:
+    - board (list): A list representing the Tic Tac Toe board.
+
+    Returns:
+    - int: Chosen position on the board.
+    """
     position = ''
     while not position.isdigit() or int(position) not in range(1, 10) or not space_check(board, int(position)):
         position = input('Please enter next position: ')
         if not position.isdigit() or int(position) not in range(1, 10):
             print('Position unavailable')
-        elif not space_check(board, int(position)):
+        elif not space_check(board, int(position)-1):
             print('Position occupied')
             position = ''
         else:
@@ -69,6 +138,12 @@ def player_choice(board):
 
 
 def replay():
+    """
+    Asks the players if they want to play another game.
+
+    Returns:
+    - bool: True if players want to play again, False otherwise.
+    """
     ans = ''
     while ans != 'Y' and ans != 'N':
         ans = input('Do you want to play again? Y/N ')
@@ -77,16 +152,20 @@ def replay():
 
 
 def play_game():
+    """
+    Plays a game of Tic Tac Toe.
+
+    Returns:
+    - None
+    """
     print('Welcome to Tic Tac Toe!')
     is_game_on = True
 
-    game_board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    game_board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     curr_user = choose_first()
     display_board(game_board)
 
-    users_marks = player_input()
-    user1_mark = users_marks['player1']
-    user2_mark = users_marks['player2']
+    user1_mark, user2_mark = player_input()
 
     print(f'Player 1#, you are {user1_mark}')
     print(f'Player 2#, you are {user2_mark}\n')

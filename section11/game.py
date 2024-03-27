@@ -70,6 +70,11 @@ def show_hands(dealer_hand: Hand, player_hand: Hand, players_turn=False):
 
 
 def start_game():
+    """
+    Starts the game by initializing the deck, shuffling it, dealing cards to the dealer and player,
+    and allowing the player to make a bet. Then enters a loop where the player can choose to hit or stand
+    until they either reach a hand value of 21 or bust. If the player doesn't bust, the dealer's turn begins.
+    """
 
     deck = Deck()
     deck.shuffle()

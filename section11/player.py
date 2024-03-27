@@ -5,10 +5,17 @@ from coins import Coins
 class Player:
 
     def __init__(self):
+        """
+        Initializes a player with an empty hand and a wallet of coins.
+        """
         self.hand = Hand()
         self.coins = Coins()
 
     def make_bet(self):
+        """
+        Allows the player to make a bet by inputting an integer value.
+        Validates the bet to ensure it's within the valid range
+        """
         while True:
             bet_input = input("Make a bet: ")
             try:
